@@ -23,14 +23,20 @@ class RecorridoService
         #Execute if number of Operators has changed
         if BusOperator.all.count != values["bus_operators"].length
           values["bus_operators"].each do |operator|      
-            bo = BusOperator.find(operator["id"])        
-            BusOperator.create!(operator) unless !bo.nil?         
+            bo = BusOperator.find(operator["id"])
+            if bo.nil?
+              bo = BusOperator.new(operator)                            
+              if operator["average_rating"]
+                puts bo.to_yaml
+                10.times { bo.qualifications.push({qualification_comment: nil, qualification: operator["average_rating"]}) }                 
+              end
+              bo.save
+            end            
           end
         end  
       rescue Exception => e
         puts e
       end  
-
     end
 
 end

@@ -1,30 +1,47 @@
+%br
+%div.row
+  %div.col-sm    
+    - if notice
+      %div.alert.alert-success= notice
 
-- if notice
-  %div.alert.alert-success= notice
+%div.row
+  %div.col-sm 
+    %p.h4 
+      = @bus_operator.official_name
 
-%h4= @bus_operator.official_name
-= link_to 'Editar', edit_bus_operator_path(@bus_operator)
-= link_to 'Ver calificaciones', qualifications_bus_operator_url
+    = link_to 'Editar', edit_bus_operator_path(@bus_operator) | 
+    = link_to 'Ver calificaciones', qualifications_bus_operator_url
 
-= image_tag(@bus_operator.images[:mdpi])
+    %ul
+      %li
+        %p.h5
+          Calificación
+          = @bus_operator.average_rating.to_s + ' de 5'
 
-%ul
-  %li= 'Calificación: ' + @bus_operator.average_rating.to_s + ' de 5'
-  %li= 'Descripción: '
+      %li
+        %p.h5
+          Descripción:
+          
+        %p.lead= @bus_operator.description 
 
-  %p= @bus_operator.description 
+  %div.col-sm   
+    = image_tag(@bus_operator.images[:mdpi])
 
 
-= form_with model: @bus_operator, url: qualify_bus_operator_path, method: :post do
-  
-  %div.form_group
-    = label_tag "Calificar"
-    = text_area(:bus_operator, :qualification_comment, cols: 80, rows: 10)
-  
-  %div.form_group
-    = select :bus_operator,:qualification, options_for_select((1..5).to_a), {:prompt => 'Nota'}, { class: 'form-control'}
+%div.row
+  %div.col-12
 
-  %div.actions
-    = submit_tag
-
-= link_to 'Back', bus_operators_path
+    = form_with model: @bus_operator, url: qualify_bus_operator_path, method: :post do
+      
+      %div.form_group{:style => "float:left"}
+        = label :qualification_comment, 'Calificar'         
+        %br
+        = text_area(:bus_operator, :qualification_comment, cols: 80, rows: 10)
+      
+        = select :bus_operator,:qualification, options_for_select((1..5).to_a), {:prompt => 'Nota'}, { class: 'form-control'}
+     
+      %div.form_group
+        %div.actions
+          = link_to 'Volver',  bus_operators_path, class: 'btn btn-light'
+          = submit_tag 'Grabar', class: 'btn btn-primary'
+      

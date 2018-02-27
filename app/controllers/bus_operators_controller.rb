@@ -70,6 +70,8 @@ class BusOperatorsController < ApplicationController
   # Add a new qualification for BusOperator
   def qualify    
     @bus_operator.push(qualifications: {qualification_comment: bus_operator_params[:qualification_comment], qualification: bus_operator_params[:qualification]})
+    @bus_operator.set_average_rating
+    @bus_operator.save!
     redirect_to qualifications_bus_operator_url
   end
 

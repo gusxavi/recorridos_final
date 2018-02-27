@@ -6,8 +6,10 @@
       - bus_operator.errors.full_messages.each do |message|
         %li= message
 
-  = label_tag "Descripción"
-  = text_area(:bus_operator, :description, cols: 80, rows: 10)
+  %div.form-group
+    = label :description, "Descripción"
+    %br
+    = text_area(:bus_operator, :description, cols: 80, rows: 10)
 
   %div.actions
-    = form.submit
+    = submit_tag 'Grabar', class: 'btn btn-primary'
