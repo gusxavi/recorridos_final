@@ -1,0 +1,25 @@
+%p#notice= notice
+
+%h3 Operadores de buses
+
+= form_tag bus_operators_url, :method => :get do          
+  %div.form_group.col-3= select :bus_operator,:criteria, options_for_select([["Nombre", "official_name"], ["Calificacion", "average_rating"]]), {:prompt => 'Ordernar por'}, { class: 'form-control', onchange: 'this.form.submit();' }
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th.span1 Logo
+      %th.span1 Name
+      %th.span1 Rate
+      %th.span1{:colspan => "3"} Options
+
+  %tbody#operatorsTable
+    - @bus_operators.each do |bus_operator|
+      %tr
+        %td= image_tag(bus_operator.icons[:medium])
+        %td= bus_operator.official_name
+        %td= bus_operator.average_rating
+        %td= link_to 'Ver', bus_operator
+        %td= link_to 'Editar', edit_bus_operator_path(bus_operator)
+
+= paginate @bus_operators

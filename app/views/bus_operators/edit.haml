@@ -1,0 +1,7 @@
+%h4= "Editando " + @bus_operator.official_name
+
+
+= render 'form', bus_operator: @bus_operator
+
+= link_to 'Show', @bus_operator
+= link_to 'Back', bus_operators_path

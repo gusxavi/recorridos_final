@@ -1,0 +1,12 @@
+= form_with(model: bus_operator, local: true) do |form|
+  - if bus_operator.errors.any?
+    %div#error_explanation
+      %h2= pluralize(bus_operator.errors.count, "error") + " prohibited this bus_operator from being saved:"
+      %ul
+      - bus_operator.errors.full_messages.each do |message|
+        %li= message
+  = label_tag "Descripción"
+  = text_area(:bus_operator, :description, cols: 80, rows: 10)
+
+  %div.actions
+    = form.submit
