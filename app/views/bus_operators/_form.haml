@@ -5,6 +5,7 @@
       %ul
       - bus_operator.errors.full_messages.each do |message|
         %li= message
+
   = label_tag "Descripción"
   = text_area(:bus_operator, :description, cols: 80, rows: 10)
 

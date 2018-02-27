@@ -1,4 +1,6 @@
-%p#notice= notice
+
+- if notice
+  %div.alert.alert-success= notice
 
 %h4= @bus_operator.official_name
 = link_to 'Editar', edit_bus_operator_path(@bus_operator)

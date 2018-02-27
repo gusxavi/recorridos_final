@@ -81,8 +81,8 @@ class BusOperatorsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_bus_operator      
-      @bus_operator = BusOperator.find(params[:id])
+    def set_bus_operator
+      @bus_operator = BusOperator.find(params[:id].to_i)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
